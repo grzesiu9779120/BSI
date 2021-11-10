@@ -1,0 +1,22 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "doc": "jsdoc -c jsdoc.json",
+  "keywords": [],
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "doc": "jsdoc -c jsdoc.json",
+    "jsdocs": "^1.0.0",
+    "mathjs": "^10.0.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.7"
+  }
+}

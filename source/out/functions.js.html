@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: functions.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: functions.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {fraction, subtract, number, multiply, add} from 'mathjs';
+
+
+/**
+ * Function for calculating the probability of selecting one of two persons with the entered probabilities for them
+ * @param {number} np1 - The numerator of the fraction with the probability of selecting the first person
+ * @param {number} dp1 - The denominator of the fraction with the probability of selecting the first person
+ * @param {number} np2 - he numerator of the fraction with the probability of selecting the second person
+ * @param {number} dp2 - The denominator of the fraction with the probability of selecting the second person
+ * @returns {string} - The  probability of selecting one of the two people with the entered probability for them expressed in the form of a regular fraction and a decimal fraction
+ */
+
+const ProbabilitySelectingPerson = (np1,dp1,np2,dp2) =>{
+    const person1 = [fraction(np1,dp1), subtract(1, fraction(np1,dp1))];
+    const person2 = [fraction(np2,dp2), subtract(1, fraction(np2,dp2))]
+    const probability = add(multiply(person1[0],person2[1]), multiply(person2[0], person1[1]));
+    return `${probability.n} / ${probability.d} in fraction and ${number(probability).toFixed(4)} decimal`;
+};
+
+
+/**
+ * Function to calculate the number of employees needed to handle all customers' equipment repair orders and the annual amount paid by customers to achieve the indicated profit
+ * @param {number} weeklyWorkingTime - The working time of the client's device during the week, expressed in hours
+ * @param {number} numberClients - Number of clients served
+ * @param {number} numberFaults - Number of device failures in 100 hours
+ * @param {number} employeeDailyOrders - The number of orders that one employee can perform during the day
+ * @param {number} averageCostRepair - The average cost of repair for one defect
+ * @param {number} percentageProfit - Expected percentage profit
+ * @returns {string} - The number of employees needed and the annual amount paid by the client to achieve the indicated profit
+ */
+
+const numberEmployeesAndProfitableAnnualFee = (
+    weeklyWorkingTime,
+    numberClients,
+    numberFaults,
+    employeeDailyOrders,
+    averageCostRepair,
+    percentageProfit) => {
+
+      const  numberFailuresPerWeek = ((weeklyWorkingTime * numberClients) / (100 / numberFaults));
+      const  neededWorkers = numberFailuresPerWeek / (5 * employeeDailyOrders);
+      const  annualCostPerCustomer = ((averageCostRepair * numberFailuresPerWeek) * 52.18) / numberClients;
+      const  annualFeeCost = annualCostPerCustomer * (percentageProfit / 100) + annualCostPerCustomer;
+      return `${neededWorkers}   ${annualFeeCost}`;
+    
+
+};
+
+/**
+ * Function for calculating the number of parts to be replaced knowing the total number of working parts, their failure rate and working time per year expressed in days
+ * @param {number} failure_rate_a - The failure rate for the first part
+ * @param {number} failure_rate_b - The failure rate for the second part
+ * @param {number} count - The number of working parts
+ * @param {number} time - The time the parts are working
+ * @returns {string} - Number of parts to be replaced
+ */
+
+ const numberPartsToReplace  = (
+  failure_rate_a, 
+  failure_rate_b, 
+  count, 
+  time) =>{
+
+  return Math.ceil(failure_rate_a * count * time * 24)  + " " + Math.ceil(failure_rate_b * count * time * 24);
+};
+
+/**
+ * Function that allows to catch incorrect parameters entered by the user and ensure that the selected function is called again
+ * @param {function} func - The function that will be called
+ */
+
+const tryToDo = (func) =>{
+    try{
+      func
+    }catch(error){
+      console.log(`Incorrect values have been entered. \n
+      Below is the error message:`);
+    }
+  }
+
+export {ProbabilitySelectingPerson, numberEmployeesAndProfitableAnnualFee, numberPartsToReplace, tryToDo};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#numberEmployeesAndProfitableAnnualFee">numberEmployeesAndProfitableAnnualFee</a></li><li><a href="global.html#numberPartsToReplace">numberPartsToReplace</a></li><li><a href="global.html#ProbabilitySelectingPerson">ProbabilitySelectingPerson</a></li><li><a href="global.html#tryToDo">tryToDo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Nov 10 2021 12:02:12 GMT+0100 (czas środkowoeuropejski standardowy)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
