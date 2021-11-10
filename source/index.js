@@ -19,23 +19,25 @@ const rl = readline.createInterface({
     console.log("Select the function you want to use");
     rl.on('line', function (line) {
         if(0 < parseInt(line) && parseInt(line) < 6) {
-          const choiceFunction = map.get(line);
+          console.log("Enter the necessary parameters");
+          const choiceFunction = map.get(line)
+        rl.on('line', function (line) {
+          const arrayOfParameters = line.split(/\s+|[,\/]/g).map(e => parseFloat(e));
+          try{
+            console.log(choiceFunction(...arrayOfParameters));
+          rl.close();
+          }catch(error){
+            console.log(`Invalid value for parameter \n ${error}`);
+            rl.close();
+          }
+        });
         }
         else{
           console.log("Invalid value. The correct function has not been selected");
           rl.close();
         }
-        const choiceFunction = map.get(line)
-        console.log("Enter the necessary parameters");
-        rl.on('line', function (line) {
-          const arrayOfParameters = line.split(/\s+|[,\/]/g).map(e => parseFloat(e));
-          console.log(choiceFunction(...arrayOfParameters));
-          rl.close();
-        });
      });
   }
-
-
 
 
   startProgram();

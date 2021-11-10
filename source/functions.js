@@ -70,7 +70,7 @@ const numberEmployeesAndProfitableAnnualFee = (
 const probabilityOfBeingShotDown = (
 ...probabilityOfShots
 ) =>{
-  const arr = probabilityOfShots.map(pof => 1 - pof);
+  const arr = probabilityOfShots.map(poof => 1 - poof);
   const sumProbability = 1 - arr.reduce((acc,curr) => {
     return acc * curr;
   });
@@ -100,18 +100,4 @@ return `${sumProbability.toFixed(3)}`;
     return `${((child*adults)/summArr).toFixed(3)}`;
   };
 
-
-/**
- * Function that allows to catch incorrect parameters entered by the user and ensure that the selected function is called again
- * @param {function} func - The function that will be called
- */
- const tryToDo = (func) =>{
-  try{
-    console.log(func);
-  }catch(error){
-    console.log(`Incorrect values have been entered. \n
-    Below is the error message: \n ${console.error()}`);
-    startProgram();
-  }
-}
 export {probabilitySelectingPerson, numberEmployeesAndProfitableAnnualFee, numberPartsToReplace, probabilityOfBeingShotDown,probabilityOfSelectTwoChildren};
