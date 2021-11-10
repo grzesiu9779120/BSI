@@ -1,3 +1,10 @@
+/*
+Author:
+-Grzegorz S
+-Mikolaj S
+*/
+
+
 import {probabilitySelectingPerson, numberEmployeesAndProfitableAnnualFee, numberPartsToReplace, probabilityOfBeingShotDown,probabilityOfSelectTwoChildren} from './functions.js'
 import * as readline from "readline";
 
