@@ -16,7 +16,8 @@ const rl = readline.createInterface({
 
 
   const startProgram = () =>{
-    console.log("Select the function you want to use");
+    console.log("Select the function you want to use: \n 1: Calculate probability to select one person with two \n 2: Calculate number of needed employers and anual fee for one client \n 3: Calculate number of parts that should be replaced \n 4: Calculate probability shootings down the plane in a series of shots \n 5: Probability of choosing two children from a group of people");
+
     rl.on('line', function (line) {
         if(0 < parseInt(line) && parseInt(line) < 6) {
           console.log("Enter the necessary parameters");
