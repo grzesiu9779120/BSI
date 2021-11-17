@@ -24,9 +24,11 @@ const probabilitySelectingPerson = (np1, dp1, np2, dp2) => {
     multiply(person1[0], person2[1]),
     multiply(person2[0], person1[1])
   );
-  return `${probability.n} / ${probability.d} in fraction and ${number(
-    probability
-  ).toFixed(4)} decimal`;
+  return `The probability of choosing one of the given persons is ${
+    probability.n
+  } / ${probability.d} in fraction and ${number(probability).toFixed(
+    4
+  )} decimal`;
 };
 /**
  * Function to calculate the number of employees needed to handle all customers' equipment repair orders and the annual amount paid by customers to achieve the indicated profit
@@ -47,6 +49,10 @@ const numberEmployeesAndProfitableAnnualFee = (
   averageCostRepair,
   percentageProfit
 ) => {
+  if (weeklyWorkingTime > 168) {
+    return 'Inavalid value, possible number of hours per week exceeded.';
+  }
+
   const numberFailuresPerWeek =
     (weeklyWorkingTime * numberClients) / (100 / numberFaults);
   const neededWorkers = numberFailuresPerWeek / (5 * employeeDailyOrders);
@@ -54,7 +60,9 @@ const numberEmployeesAndProfitableAnnualFee = (
     (averageCostRepair * numberFailuresPerWeek * 52.18) / numberClients;
   const annualFeeCost =
     annualCostPerCustomer * (percentageProfit / 100) + annualCostPerCustomer;
-  return `${neededWorkers.toFixed(0)}   ${annualFeeCost.toFixed(2)}`;
+  return `The number of employees needed is ${Math.ceil(
+    neededWorkers
+  )} the annual amount paid by clients should be ${annualFeeCost.toFixed(2)}.`;
 };
 
 /**
@@ -70,9 +78,11 @@ const numberPartsToReplace = (failureRateA, failureRateB, count, time) => {
   if (failureRateA > 1 || failureRateB > 1) {
     return 'Invalid value, the failure rate must not be greater than 1.';
   }
-  return `${Math.ceil(failureRateA * count * time * 24)} ${Math.ceil(
+  return `For the first failure rate, you will have to replace ${Math.ceil(
+    failureRateA * count * time * 24
+  )} parts and for the second ${Math.ceil(
     failureRateB * count * time * 24
-  )}`;
+  )} parts.`;
 };
 
 /**
@@ -83,7 +93,9 @@ const numberPartsToReplace = (failureRateA, failureRateB, count, time) => {
 const probabilityOfBeingShotDown = (...probabilityOfShots) => {
   const arr = probabilityOfShots.map((poof) => 1 - poof);
   const sumProbability = 1 - arr.reduce((acc, curr) => acc * curr);
-  return `${sumProbability.toFixed(3)}`;
+  return `The probability of hitting the target in the given series of shots is ${sumProbability.toFixed(
+    4
+  )}.`;
 };
 
 /**
@@ -107,7 +119,10 @@ const probabilityOfSelectTwoChildren = (
   const child = (numberChildren * (numberChildren - 1)) / 2;
   const adults =
     ((numberMen + numberWomen) * (numberMen + numberWomen - 1)) / 2;
-  return `${((child * adults) / summArr).toFixed(3)}`;
+  return `The probability of choosing two children from a group of people is ${(
+    (child * adults) /
+    summArr
+  ).toFixed(3)}`;
 };
 
 export {
