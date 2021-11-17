@@ -1,4 +1,10 @@
-import { fraction, subtract, number, multiply, add } from "mathjs";
+/*
+Author:
+-Grzegorz Słomiński
+-Mikolaj Saja
+*/
+import { fraction, subtract, number, multiply, add } from 'mathjs';
+
 /**
  * Function for calculating the probability of selecting one of two persons with the entered probabilities for them
  * @param {number} np1 - The numerator of the fraction with the probability of selecting the first person
@@ -9,6 +15,9 @@ import { fraction, subtract, number, multiply, add } from "mathjs";
  */
 
 const probabilitySelectingPerson = (np1, dp1, np2, dp2) => {
+  if (dp1 < np1 || dp2 < np2) {
+    return 'Invalid value, denominator cannot be greater than numerator.';
+  }
   const person1 = [fraction(np1, dp1), subtract(1, fraction(np1, dp1))];
   const person2 = [fraction(np2, dp2), subtract(1, fraction(np2, dp2))];
   const probability = add(
@@ -45,7 +54,7 @@ const numberEmployeesAndProfitableAnnualFee = (
     (averageCostRepair * numberFailuresPerWeek * 52.18) / numberClients;
   const annualFeeCost =
     annualCostPerCustomer * (percentageProfit / 100) + annualCostPerCustomer;
-  return `${neededWorkers}   ${annualFeeCost}`;
+  return `${neededWorkers.toFixed(0)}   ${annualFeeCost.toFixed(2)}`;
 };
 
 /**
@@ -57,10 +66,14 @@ const numberEmployeesAndProfitableAnnualFee = (
  * @returns {string} - Number of parts to be replaced
  */
 
-const numberPartsToReplace = (failureRateA, failureRateB, count, time) =>
-  `${Math.ceil(failureRateA * count * time * 24)} ${Math.ceil(
+const numberPartsToReplace = (failureRateA, failureRateB, count, time) => {
+  if (failureRateA > 1 || failureRateB > 1) {
+    return 'Invalid value, the failure rate must not be greater than 1.';
+  }
+  return `${Math.ceil(failureRateA * count * time * 24)} ${Math.ceil(
     failureRateB * count * time * 24
   )}`;
+};
 
 /**
  * Function for calculating the probability of hitting a target in a series of shots of any length, knowing the probability for each shot.
