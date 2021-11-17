@@ -1,4 +1,8 @@
 # BSI
+Author:
+Grzegorz Słomiński
+Mikołaj Saja
+
 Task 2 
 
 Source code is in the folder ./source
